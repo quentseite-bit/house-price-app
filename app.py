@@ -1,5 +1,17 @@
-
 import streamlit as st
+
+if 'authentifie' not in st.session_state:
+    st.session_state.authentifie = False
+
+if not st.session_state.authentifie:
+    mdp = st.text_input("Mot de passe", type="password")
+    if st.button("Se connecter"):
+        if mdp == st.secrets["password"]:
+            st.session_state.authentifie = True
+            st.rerun()
+        else:
+            st.error("Mot de passe incorrect")
+    st.stop()
 
 st.set_page_config(page_title="House Prices - Seite Quentin", layout="wide")
 
